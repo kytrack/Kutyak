@@ -9,15 +9,24 @@ namespace Kutyak
     class KutyaClass
     {
         int kutyaid;
-        string kutyanev;
+        int fajtaid;
+        int nevid;
+        int eletkor;
+        string utolsoell;
 
-        public KutyaClass(int kutyaid, string kutyanev)
+        public KutyaClass(int kutyaid, int fajtaid, int nevid, int eletkor, string utolsoell)
         {
             this.kutyaid = kutyaid;
-            this.kutyanev = kutyanev;
+            this.fajtaid = fajtaid;
+            this.nevid = nevid;
+            this.eletkor = eletkor;
+            this.utolsoell = utolsoell;
         }
 
-        public int Kutyaid { get => kutyaid;}
-        public string Kutyanev { get => kutyanev;}
+        public int Kutyaid { get => kutyaid; }
+        public int Fajtaid { get => fajtaid; }
+        public int Nevid { get => nevid; }
+        public int Eletkor { get => eletkor; }
+        public string Utolsoell { get => utolsoell; }
     }
 }
