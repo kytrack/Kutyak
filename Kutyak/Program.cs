@@ -39,3 +39,40 @@ KutyaClass legidosebbkutya = kutyak.OrderByDescending(k => k.Eletkor).First();
 int legidosebbfajtaid = legidosebbkutya.Fajtaid;
 int legidosebbnevid = legidosebbkutya.Nevid;
 
+KutyaFajtaClass legidosebbfajtakutya = kutyafajtak.First(k => k.Kutyaid == legidosebbfajtaid);
+string legidosebbfajta = legidosebbfajtakutya.Kutyanev;
+
+KutyaNevClass legidosebbnevukutya = kutyanevek.First(k => k.Kutyaid == legidosebbnevid);
+string legidosebbnev=legidosebbnevukutya.Kutyanev;
+
+Console.WriteLine($"7.feladat: Legidősebb Kutya neve és fajtája: {legidosebbnev}, {legidosebbfajta}");
+
+int[] januar10esvizsgalatidk=kutyak.Where(k => k.Utolsoell == "2018.01.10").Select(k => k.Fajtaid).ToArray();
+string[]fajtak=kutyafajtak.Where(k => januar10esvizsgalatidk.Contains(k.Kutyaid)).Select(k => k.Kutyanev).ToArray();
+
+var ismetlodasNelkuliAdatok = fajtak.Distinct();
+
+Console.WriteLine($"8.feladat: Január 10.-en vizsgált kutya fajták:");
+foreach (var adat in ismetlodasNelkuliAdatok)
+{
+    int adatSzamlalo = fajtak.Count(k => k == adat);
+    Console.WriteLine($"\t{adat}: {adatSzamlalo} kutya");
+}
+
+var legtobbEll = kutyak.GroupBy(k => k.Utolsoell).OrderByDescending(g => g.Count()).First();
+Console.WriteLine($"9.feladat: Legjobban terhelt nap: {legtobbEll.Key}: {legtobbEll.Count()} kutya");
+
+StreamWriter sw = new StreamWriter("névstatisztika.txt", append: true);
+
+
+var kutyanevekossz = kutyanevek.GroupBy(k => k.Kutyanev).OrderByDescending(k => k.Count());
+
+foreach (var item in kutyanevekossz)
+{
+    sw.WriteLine($"{item.Key}, {item.Count()}");
+}
+
+
+sw.Close();
+Console.WriteLine($"10.feladat: névstatisztika.txt");
+
